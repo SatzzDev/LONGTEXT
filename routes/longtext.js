@@ -49,7 +49,7 @@ router.post("/copy/:id", (req, res) => {
   if (textList[id]) {
     textList[id].disalin += 1;
     writeData(textList);
-    return res.json({ success: true, message: "Berhasil menambahkan jumlah disalin." });
+    return res.json({ success: true, text: jsonSuratIzin[id].deskripsi });
   }
 
   res.status(404).json({ success: false, message: "Data tidak ditemukan." });
