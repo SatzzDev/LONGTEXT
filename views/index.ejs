@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Daftar Long Text<</title>
+<title>Daftar Long Text</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 <body>
@@ -51,16 +51,24 @@ Salin (<%= izin.disalin %>)
 </section>
 <script>
 function copyText(id) {
+// Ambil teks yang sesuai dengan ID surat
 fetch(`/copy/${id}`, { method: "POST" })
 .then((response) => response.json())
 .then((data) => {
-if (data.success) {
-alert("Teks berhasil disalin!");
+if (data.success && data.text) {
+navigator.clipboard
+.writeText(data.text) // Salin teks ke clipboard
+.then(() => {
 location.reload(); // Perbarui tampilan
-} else {
+})
+.catch(() => {
 alert("Gagal menyalin teks.");
-}
 });
+} else {
+alert("Gagal mendapatkan teks untuk disalin.");
+}
+})
+.catch(() => alert("Terjadi kesalahan saat memproses permintaan."));
 }
 
 function likeText(id) {
@@ -68,7 +76,6 @@ fetch(`/like/${id}`, { method: "POST" })
 .then((response) => response.json())
 .then((data) => {
 if (data.success) {
-alert("Anda menyukai surat ini!");
 location.reload(); // Perbarui tampilan
 } else {
 alert("Gagal memberikan like.");
