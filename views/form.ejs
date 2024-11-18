@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Tambah Longtext</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-centered">Tambah Longtext</h1>
+      <form action="/form" method="post">
+        <div class="field">
+          <label class="label">Nama</label>
+          <div class="control">
+            <input class="input" type="text" name="nama" placeholder="Masukkan nama" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Kategori</label>
+          <div class="control">
+            <input class="input" type="text" name="kategori" placeholder="Contoh: Minta Maaf, Ucapan Selamat Malam" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">LongText</label>
+          <div class="control">
+            <textarea class="textarea" name="deskripsi" placeholder="Tulis disini" rows="5" required></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary is-fullwidth">Kirim</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

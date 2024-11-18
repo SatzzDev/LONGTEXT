@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Daftar Long Text<</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+<section class="section">
+<div class="container">
+<h1 class="title has-text-centered">Daftar Long Text</h1>
+<div class="buttons is-right">
+<a href="/form" class="button is-success">Tambah Long Text Baru</a>
+</div>
+<form action="/search" method="get" class="mb-5">
+<div class="field has-addons">
+<div class="control is-expanded">
+<input class="input" type="text" name="kategori" placeholder="Cari berdasarkan kategori...">
+</div>
+<div class="control">
+<button class="button is-info">Cari</button>
+</div>
+</div>
+</form>
+<div class="columns is-multiline">
+<% textList.forEach((izin, index) => { %> <!-- Menambahkan index ke dalam iterasi -->
+<div class="column is-one-third">
+<div class="card">
+<div class="card-content">
+<p class="title"><%= izin.nama %></p>
+<p class="subtitle"><%= izin.kategori %></p>
+<div class="content">
+<%= izin.deskripsi %><br>
+<time datetime="<%= izin.tanggal %>"><%= new Date(izin.tanggal).toLocaleString() %></time>
+</div>
+<div class="buttons mt-3">
+<!-- Menambahkan index untuk mengakses ID surat -->
+<button class="button is-light is-small" onclick="copyText(<%= index %>)">
+Salin (<%= izin.disalin %>)
+</button>
+<button class="button is-danger is-small" onclick="likeText(<%= index %>)">
+❤️ (<%= izin.like %>)
+</button>
+</div>
+</div>
+</div>
+</div>
+<% }); %>
+</div>
+</div>
+</section>
+<script>
+function copyText(id) {
+fetch(`/copy/${id}`, { method: "POST" })
+.then((response) => response.json())
+.then((data) => {
+if (data.success) {
+alert("Teks berhasil disalin!");
+location.reload(); // Perbarui tampilan
+} else {
+alert("Gagal menyalin teks.");
+}
+});
+}
+
+function likeText(id) {
+fetch(`/like/${id}`, { method: "POST" })
+.then((response) => response.json())
+.then((data) => {
+if (data.success) {
+alert("Anda menyukai surat ini!");
+location.reload(); // Perbarui tampilan
+} else {
+alert("Gagal memberikan like.");
+}
+});
+}
+</script>
+</body>
+</html>

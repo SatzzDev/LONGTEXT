@@ -1,0 +1,31 @@
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <title>Hasil Pencarian</title>
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+            </head>
+            <body>
+              <section class="section">
+                <div class="container">
+                  <h1 class="title has-text-centered">Hasil Pencarian</h1>
+                  <a href="/" class="button is-link mb-4">Kembali</a>
+                  <div class="columns is-multiline">
+                    <% results.forEach(result => { %>
+                      <div class="column is-one-third">
+                        <div class="card">
+                          <div class="card-content">
+                            <p class="title"><%= result.nama %></p>
+                            <p class="subtitle"><%= result.kategori %></p>
+                            <div class="content">
+                              <%= result.deskripsi %><br>
+                              <time datetime="<%= result.tanggal %>"><%= new Date(result.tanggal).toLocaleString() %></time>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% }); %>
+                  </div>
+                </div>
+              </section>
+            </body>
+            </html>
